@@ -1,10 +1,12 @@
-import React from 'react'
-
-import { ExampleComponent } from 'use-route'
-import 'use-route/dist/index.css'
+import React from "react"
 
 const App = () => {
-  return <ExampleComponent text="Create React Library Example 😄" />
+
+  return (
+    <div>
+      hello world
+    </div>
+  )
 }
 
 export default App
