@@ -1,3 +1,8 @@
+export {
+  useEffect,
+  useState
+} from "react"
+
 export const POPSTATE = "popstate"
 
 export const location = document.location
@@ -24,6 +29,11 @@ export function pipe(v, ...funcs) {
 
 export function failWith(msg) {
   throw new Error(msg)
+}
+
+export function arrEq(a1, a2) {
+  if (a1.length !== a2.length) return false
+  return a1.every((v, i) => v === a2[i])
 }
 
 export function makeEvent(eventName) {
@@ -54,15 +64,27 @@ export function parsePath(raw) {
           : raw,
         raw => raw.split("?")[0],
         raw => raw.split("/")
-          .filter(s => s.length !== 0)
+                  .filter(s => s.length !== 0)
       )
   }
 }
 
 export function parseHash(raw) {
-  failWith("todo")
+  switch(raw) {
+    case "":
+    case "#":
+      return ""
+    default:
+      return raw.slice(1)
+  }
 }
 
 export function parseSearch(raw) {
-  failWith("todo")
+  switch(raw) {
+    case "":
+    case "?":
+      return ""
+    default:
+      return raw.split("?")[1]
+  }
 }
