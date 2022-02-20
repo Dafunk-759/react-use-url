@@ -2,7 +2,7 @@ import React from "react"
 import {
   matchPath,
   otherwise
-} from "use-route"
+} from "react-use-url"
 
 export function Example1({ path }) {
 

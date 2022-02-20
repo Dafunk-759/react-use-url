@@ -3,7 +3,7 @@ import {
   matchPath,
   otherwise,
   push
-} from "use-route"
+} from "react-use-url"
 
 
 export function Example2({path}) {

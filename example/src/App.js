@@ -4,7 +4,7 @@ import {
   push,
   matchPath,
   otherwise
-} from "use-route"
+} from "react-use-url"
 import { Example1 } from "./Example1"
 import { Example2 } from "./Example2"
 
