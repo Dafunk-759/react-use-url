@@ -16,7 +16,7 @@ import {
   matchPath,
   otherwise,
   useUrl
-} from "use-route"
+} from "react-use-url"
 
 export default function App() {
   const { path } = useUrl()
