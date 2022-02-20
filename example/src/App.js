@@ -7,6 +7,7 @@ import {
 } from "react-use-url"
 import { Example1 } from "./Example1"
 import { Example2 } from "./Example2"
+import { Example3 } from "./Example3"
 
 export function App() {
   const { path } = useUrl()
@@ -16,6 +17,7 @@ export function App() {
     [otherwise]: () => matchPath([path[0]], {
       "/example1": () => <Example1 path={path.slice(1)}/>,
       "/example2": () => <Example2 path={path.slice(1)}/>,
+      "/example3": () => <Example3 path={path.slice(1)}/>,
       [otherwise]: () => <NotFound />
     })
   })
@@ -30,6 +32,7 @@ function Links() {
     <>
       <button onClick={() => push("/example1")}>Example1</button> 
       <button onClick={() => push("/example2")}>Example2</button> 
+      <button onClick={() => push("/example3")}>Example3</button> 
     </>
   )
 }

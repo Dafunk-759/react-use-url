@@ -13,11 +13,13 @@ export const removeEventListener = window.removeEventListener.bind(window)
 
 export const dispatchEvent = window.dispatchEvent.bind(window)
 
-const history = window.history
+export const history = window.history
 
-export const pushState = history.pushState.bind(history, null, "")
+export const pushState = (path, state = null) => 
+  history.pushState(state, "", path)
 
-export const replaceState = history.replaceState.bind(history, null, "")
+export const replaceState = (path, state = null) => 
+  history.replaceState(state, "", path)
 
 export function pipe(v, ...funcs) {
   let ret = v
@@ -87,4 +89,24 @@ export function parseSearch(raw) {
     default:
       return raw.split("?")[1]
   }
+}
+
+export function safeStringify(state) {
+  let ret = null
+  try {
+    ret = JSON.stringify(state)
+  }catch(e) {
+    console.error(e)
+  }
+  return ret
+}
+
+export function safeParse(state) {
+  let ret = null
+  try {
+    ret = JSON.parse(state)
+  }catch(e) {
+    console.error(e)
+  }
+  return ret
 }

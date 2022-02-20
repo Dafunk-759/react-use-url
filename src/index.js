@@ -5,6 +5,7 @@ import {
   parseHash,
   parseSearch,
   location,
+  history,
   pushState,
   replaceState,
   dispatchEvent,
@@ -12,16 +13,18 @@ import {
   removeEventListener,
   makeEvent,
   POPSTATE,
-  arrEq
+  arrEq,
+  safeStringify,
+  safeParse
 } from "./util"
 
-export function push(path) {
-  pushState(path)
+export function push(path, state = null) {
+  pushState(path, safeStringify(state))
   dispatchEvent(makeEvent(POPSTATE))
 }
 
-export function replace(path) {
-  replaceState(path)
+export function replace(path, state = null) {
+  replaceState(path, safeStringify(state))
   dispatchEvent(makeEvent(POPSTATE))
 }
 
@@ -29,7 +32,8 @@ export function getInitUrl() {
   return {
     path: path(),
     hash: hash(),
-    search: search()
+    search: search(),
+    state: history.state
   }
 }
 
@@ -57,7 +61,10 @@ export function useUrl() {
     return () => unwatchUrl(watchID)
   })
 
-  return url
+  return {
+    ...url,
+    state: safeParse(url.state)
+  }
 }
 
 export const otherwise = Symbol("otherwise")
@@ -102,7 +109,10 @@ function match(realPath, matcher) {
 
 function urlEqual(u1, u2) {
   return (
-    u1.hash === u2.hash && u1.search == u2.search && arrEq(u1.path, u2.path)
+    u1.hash === u2.hash 
+      && u1.search === u2.search 
+      && arrEq(u1.path, u2.path)
+      && u1.state === u2.state   
   ) 
 }
 
