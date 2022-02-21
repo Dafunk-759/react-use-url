@@ -29,11 +29,15 @@ export function replace(path, state = null) {
 }
 
 export function getInitUrl() {
+  const state = typeof history.state === "string"
+    ? history.state
+    : safeStringify(history.state)
+
   return {
     path: path(),
     hash: hash(),
     search: search(),
-    state: history.state
+    state
   }
 }
 

@@ -1,4 +1,9 @@
 import {
+  renderHook,
+  act
+} from "@testing-library/react-hooks"
+
+import {
   parsePath,
   parseSearch,
   parseHash,
@@ -7,7 +12,10 @@ import {
 
 import {
   matchPath,
-  otherwise
+  otherwise,
+  useUrl,
+  push,
+  replace
 } from "./index"
 
 describe("test parsePath", () => {
@@ -90,5 +98,111 @@ describe("test matchPath", () => {
     expect(ret2).toBe("branch2")
     expect(ret3).toBe("524,foo")
     expect(ret4).toBe("default branch")
+  })
+})
+
+describe("test useUrl", () => {
+  test("first call useUrl should given the init url", () => {
+    const { result } = renderHook(() => useUrl())
+    
+    expect(result.current).toEqual({
+      path: [],
+      hash: "",
+      search: "",
+      state: null
+    })
+  })
+
+  test("push should work", () => {
+    const { result } = renderHook(() => useUrl())
+    
+    expect(result.current).toEqual({
+      path: [],
+      hash: "",
+      search: "",
+      state: null
+    })
+
+    act(() => push("/foo/bar"))
+
+    expect(result.current).toEqual({
+      path: ["foo", "bar"],
+      hash: "",
+      search: "",
+      state: null
+    })
+
+    act(() => push("/foo/bar/baz", result.current.path))
+
+    expect(result.current).toEqual({
+      path: ["foo", "bar", "baz"],
+      hash: "",
+      search: "",
+      state: ["foo", "bar"]
+    })
+
+    act(() => push("/foo?age=12&name=bar#1ac7", {key: "7a6f"}))
+
+    expect(result.current).toEqual({
+      path: ["foo"],
+      hash: "1ac7",
+      search: "age=12&name=bar",
+      state: {key: "7a6f"}
+    })
+
+    act(() => push("/"))
+    expect(result.current).toEqual({
+      path: [],
+      hash: "",
+      search: "",
+      state: null
+    })
+  })
+
+
+  test("replace should work", () => {
+    const { result } = renderHook(() => useUrl())
+    
+    expect(result.current).toEqual({
+      path: [],
+      hash: "",
+      search: "",
+      state: null
+    })
+
+    act(() => replace("/foo/bar"))
+
+    expect(result.current).toEqual({
+      path: ["foo", "bar"],
+      hash: "",
+      search: "",
+      state: null
+    })
+
+    act(() => replace("/foo/bar/baz", result.current.path))
+
+    expect(result.current).toEqual({
+      path: ["foo", "bar", "baz"],
+      hash: "",
+      search: "",
+      state: ["foo", "bar"]
+    })
+
+    act(() => replace("/foo?age=12&name=bar#1ac7", {key: "7a6f"}))
+
+    expect(result.current).toEqual({
+      path: ["foo"],
+      hash: "1ac7",
+      search: "age=12&name=bar",
+      state: {key: "7a6f"}
+    })
+
+    act(() => replace("/"))
+    expect(result.current).toEqual({
+      path: [],
+      hash: "",
+      search: "",
+      state: null
+    })
   })
 })
