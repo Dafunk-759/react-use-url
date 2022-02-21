@@ -6,6 +6,7 @@ import {
   replace,
   useUrl
 } from "react-use-url"
+import { Link } from "./Link"
 
 const fakeAuthProvider = {
   isAuthenticated: false,
@@ -138,10 +139,10 @@ function Layout({children}) {
       <AuthStatus />
       <ul>
         <li>
-          <Link to="/">Public Page</Link>
+          <Link to="/example3/" >Public Page</Link>
         </li>
         <li>
-          <Link to="/protected">Protected Page</Link>
+          <Link to="/example3/protected" >Protected Page</Link>
         </li>
       </ul>
       {children}
@@ -193,28 +194,4 @@ function PublicPage() {
 
 function ProtectedPage() {
   return <h3>Protected</h3>;
-}
-
-function Link({
-  to,
-  action = "push", 
-  children
-}) {
-  const link = "/example3" + to
-
-  const onClick = e => {
-    e.preventDefault()
-    switch(action) {
-      case "push":
-        return push(link)
-      case "replace":
-        return replace(link)
-      default:
-        return push(link)
-    }
-  }
-
-  return (
-    <a href={link} onClick={onClick}>{children}</a>
-  )
 }

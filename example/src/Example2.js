@@ -1,9 +1,9 @@
 import * as React from "react"
 import {
   matchPath,
-  otherwise,
-  push
+  otherwise
 } from "react-use-url"
+import { Link } from "./Link"
 
 
 export function Example2({path}) {
@@ -36,16 +36,16 @@ function Layout({children}) {
       <nav>
         <ul>
           <li>
-            <Link to="/">Home</Link>
+            <Link to="/example2">Home</Link>
           </li>
           <li>
-            <Link to="/about">About</Link>
+            <Link to="/example2/about">About</Link>
           </li>
           <li>
-            <Link to="/dashboard">Dashboard</Link>
+            <Link to="/example2/dashboard">Dashboard</Link>
           </li>
           <li>
-            <Link to="/nothing-here">Nothing Here</Link>
+            <Link to="/example2/nothing-here">Nothing Here</Link>
           </li>
         </ul>
       </nav>
@@ -84,16 +84,9 @@ function NoMatch() {
     <div>
       <h2>Nothing to see here!</h2>
       <p>
-        <Link to="/">Go to the home page</Link>
+        <Link to="/example2">Go to the home page</Link>
       </p>
     </div>
   );
 }
 
-function Link({to, children}) {
-  return (
-    <button onClick={() => push("/example2" + to)}>
-      {children}
-    </button>
-  )
-}

@@ -150,7 +150,9 @@ describe("test useUrl", () => {
       state: {key: "7a6f"}
     })
 
+    // reset global state for next test
     act(() => push("/"))
+
     expect(result.current).toEqual({
       path: [],
       hash: "",
@@ -197,7 +199,9 @@ describe("test useUrl", () => {
       state: {key: "7a6f"}
     })
 
+    // reset global state for next test
     act(() => replace("/"))
+
     expect(result.current).toEqual({
       path: [],
       hash: "",
