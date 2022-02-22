@@ -11,6 +11,7 @@ import { Example3 } from "./Example3"
 import { Example4 } from "./Example4"
 import { Example5 } from "./Example5"
 import { Example6 } from "./Example6"
+import { Example7 } from "./Example7"
 
 export function App() {
   const { path } = useUrl()
@@ -24,6 +25,7 @@ export function App() {
       "/example4": () => <Example4 path={path.slice(1)}/>,
       "/example5": () => <Example5 path={path.slice(1)}/>,
       "/example6": () => <Example6 path={path.slice(1)}/>,
+      "/example7": () => <Example7 path={path.slice(1)}/>,
       [otherwise]: () => <NotFound />
     })
   })
@@ -42,6 +44,7 @@ function Links() {
       <button onClick={() => push("/example4")}>Example4</button> 
       <button onClick={() => push("/example5")}>Example5</button> 
       <button onClick={() => push("/example6")}>Example6</button> 
+      <button onClick={() => push("/example7")}>Example7</button> 
     </>
   )
 }

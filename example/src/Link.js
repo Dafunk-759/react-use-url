@@ -7,6 +7,7 @@ import {
 export function Link({
   to,
   action = "push", 
+  state = null,
   children,
   ...props
 }) {
@@ -17,11 +18,11 @@ export function Link({
 
     switch(action) {
       case "push":
-        return push(to)
+        return push(to, state)
       case "replace":
-        return replace(to)
+        return replace(to, state)
       default:
-        return push(to)
+        return push(to, state)
     }
 
   }
