@@ -14,7 +14,10 @@ import { Example6 } from "./Example6"
 import { Example7 } from "./Example7"
 
 export function App() {
-  const { path } = useUrl()
+  const { path: rawPath } = useUrl()
+  // deploy to https://dafunk-759.github.io/react-use-url/
+  // so need to remove first path.
+  const path = rawPath.slice(1)
   
   const body = matchPath(path, {
     "/": () => <Links />,
