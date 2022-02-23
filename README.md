@@ -156,9 +156,9 @@ and dispatch the `popstate` event.
  
 this will trigger the subs rerun.
 the state will be serialized and store in the `window.history.state`.
-
+`baseUrl` is default to "".
 ```ts
-export function push<A>(path:string, state?:A): void
+export function push<A>(path:string, state?:A, baseUrl?:string): void
 ```
 
 ### replace
@@ -167,9 +167,9 @@ and dispatch the `popstate` event.
 
 this will trigger the subs rerun.
 the state will be serialized and store in the `window.history.state`.
-
+`baseUrl` is default to "".
 ```ts
-export function replace<A>(path:string, state?:A): void
+export function replace<A>(path:string, state?:A, baseUrl?:string): void
 ```
 
 ### matchPath

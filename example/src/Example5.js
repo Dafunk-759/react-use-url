@@ -25,7 +25,7 @@ export function Example5({path}) {
 
 function CustomLink({ children, to, ...props }) {
   const { path } = useUrl()
-  const isMatch = matchPath(path, {
+  const isMatch = matchPath(path.slice(1) /* remove baseUrl */, {
     [to]: () => true,
     [otherwise]: () => false
   })

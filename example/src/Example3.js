@@ -2,11 +2,14 @@ import React from "react"
 import {
   matchPath,
   otherwise,
-  push,
-  replace,
+  push as originPush,
+  replace as originReplace,
   useUrl
 } from "react-use-url"
 import { Link } from "./Link"
+
+const push = (path, state = null) => originPush(path, state, process.env.PUBLIC_URL)
+const replace = (path, state = null) => originReplace(path, state, process.env.PUBLIC_URL)
 
 const fakeAuthProvider = {
   isAuthenticated: false,
@@ -125,7 +128,7 @@ function RequireAuth({ children }) {
 
   React.useEffect(() => {
     if(!auth.user) {
-      replace("/example3/login", path)
+      replace("/example3/login", path.slice(1) /* remove baseUrl */)
     }
   })
 

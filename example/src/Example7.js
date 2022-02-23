@@ -3,7 +3,7 @@ import * as React from "react"
 import {
   matchPath,
   otherwise,
-  replace,
+  replace as originReplace,
   useUrl
 } from "react-use-url"
 
@@ -11,6 +11,8 @@ import { Dialog } from "@reach/dialog"
 import "@reach/dialog/styles.css"
 
 import { Link } from "./Link"
+
+const replace = (path, state = null) => originReplace(path, state, process.env.PUBLIC_URL)
 
 const { IMAGES, getImageById } = images()
 
@@ -93,7 +95,7 @@ function Gallery() {
           <Link
             key={image.id}
             to={`/example7/img/${image.id}`}
-            state={path.slice(1)}
+            state={path.slice(2) /* remove basePath and example7 */}
             // This is the trick! Set the `backgroundLocation` in location state
             // so that when we open the modal we still see the current page in
             // the background.

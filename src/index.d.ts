@@ -11,8 +11,9 @@ export interface Url {
  * 
  * this will trigger the subs rerun.
  * the state will be serialized and store in the `window.history.state`.
+ * `baseUrl` is default to "".
  */
-export function push<A>(path:string, state?:A): void
+export function push<A>(path:string, state?:A, baseUrl?:string): void
 
 /**
  * use `history.replaceState` to replace the `path`
@@ -20,8 +21,9 @@ export function push<A>(path:string, state?:A): void
  * 
  * this will trigger the subs rerun.
  * the state will be serialized and store in the `window.history.state`.
+ * `baseUrl` is default to "".
  */
-export function replace<A>(path:string, state?:A): void
+export function replace<A>(path:string, state?:A, baseUrl?:string): void
 
 /**
  * query the global `location` and parse it to

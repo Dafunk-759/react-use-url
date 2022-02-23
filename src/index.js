@@ -18,13 +18,21 @@ import {
   safeParse
 } from "./util"
 
-export function push(path, state = null) {
-  pushState(path, safeStringify(state))
+export function push(
+  path, 
+  state = null, 
+  baseUrl = ""
+) {
+  pushState(baseUrl + path, safeStringify(state))
   dispatchEvent(makeEvent(POPSTATE))
 }
 
-export function replace(path, state = null) {
-  replaceState(path, safeStringify(state))
+export function replace(
+  path, 
+  state = null,
+  baseUrl = ""
+) {
+  replaceState(baseUrl + path, safeStringify(state))
   dispatchEvent(makeEvent(POPSTATE))
 }
 
