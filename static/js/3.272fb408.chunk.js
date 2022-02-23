@@ -1,2 +1,0 @@
-(this["webpackJsonpreact-use-url-example"]=this["webpackJsonpreact-use-url-example"]||[]).push([[3],{31:function(e,t,u){"use strict";u.r(t),u.d(t,"default",(function(){return r}));var n=u(0);function r(){return n.createElement("div",null,n.createElement("h2",null,"About"))}}}]);
-//# sourceMappingURL=3.272fb408.chunk.js.map
